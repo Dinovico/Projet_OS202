@@ -84,6 +84,8 @@ namespace Numeric
             return {m_width, m_height};
         }
 
+        size_t size() const {return m_velocityField.size();};
+
         /**
          * @brief Return the address of the first velocity vector of the velocityfield
          * 
@@ -107,6 +109,16 @@ namespace Numeric
 
         CartesianGridOfSpeed& operator = ( CartesianGridOfSpeed const& ) = default;
         CartesianGridOfSpeed& operator = ( CartesianGridOfSpeed     && ) = default;
+
+        vector const &operator[](std::size_t t_index) const {
+            assert(t_index < m_velocityField.size());
+            return m_velocityField.at(t_index);
+        }
+
+        vector &operator[](std::size_t t_index) {
+            assert(t_index < m_velocityField.size());
+            return m_velocityField.at(t_index);
+        }
 
     private:
         std::size_t m_width, m_height;
